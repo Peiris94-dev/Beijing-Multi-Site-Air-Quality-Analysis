@@ -9,7 +9,7 @@
 
 # app.py
 import streamlit as st
-from  import option_menu
+from streamlit_option_menu import option_menu
 
 def main():
     st.set_page_config(page_title="PM2.5 Prediction App", layout="wide")
