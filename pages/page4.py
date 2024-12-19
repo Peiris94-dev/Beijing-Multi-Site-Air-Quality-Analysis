@@ -68,9 +68,6 @@ def run():
     # Train model
     model = GradientBoostingRegressor()
     model.fit(X_train, y_train)
-
-    # Predictions
-    st.markdown("### Make Predictions")
     predictions = model.predict(X_test)
 
     # Display example predictions
