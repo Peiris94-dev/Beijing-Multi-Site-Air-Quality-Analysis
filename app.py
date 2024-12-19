@@ -74,7 +74,8 @@ def main():
         "Introduction": "page1",
         "EDA": "page2",
         "Modeling and Prediction": "page3",
-        "Interactive Prediction": "page4"
+        "Prediction and Visualization": "page4"
+        "Interactive Prediction Dashboard": "page5"
     }
 
     choice = st.sidebar.radio("Go to", list(pages.keys()))
