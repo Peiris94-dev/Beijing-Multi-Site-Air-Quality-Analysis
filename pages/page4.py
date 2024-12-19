@@ -52,8 +52,6 @@ def run():
     df = pd.read_csv("PRSA_Data_Aotizhongxin_20130301-20170228.csv")
     st.write(df.head())
 
-    # Preprocess data
-    st.markdown("### Select Features for Prediction")
     feature_cols = ["PM10", "SO2", "NO2", "CO", "O3", "TEMP", "PRES", "RAIN", "WSPM"]
     target_col = "PM2.5"
 
