@@ -12,20 +12,16 @@ Key features of this project include:
 ---
 
 ## 📂 Project Structure
-├── app.py # Main Streamlit application 
-├── pages/ │ 
-  ├── page1.py # Introduction page │ 
-  ├── page2.py # EDA visualizations │ 
-  ├── page3.py # Modeling and prediction │ 
-  ├── page4.py # Project details 
-├── data/ │ 
-  ├── PRSA_Data_Aotizhongxin_20130301-20170228.csv │ 
-  ├── PRSA_Data_Changping_20130301-20170228.csv │ 
-  ├── ... # Other datasets 
-├── README.md # Project documentation 
-├── requirements.txt # Python dependencies
-
-
+1. **`app.py`**: The main file that runs the Streamlit application.
+2. **`pages/`**: A directory containing the individual pages of the Streamlit multipage application.
+   - **`page1.py`**: Introduction and overview.
+   - **`page2.py`**: Exploratory Data Analysis (EDA).
+   - **`page3.py`**: Machine Learning Model Building.
+   - **`page4.py`**: Project details and future work.
+3. **`data/`**: Directory containing all datasets.
+4. **`requirements.txt`**: A file listing the Python packages required for the project.
+5. **`README.md`**: Documentation describing the project.
+6. **`LICENSE`**: License file for the project.
 ---
 
 ## 📊 Dataset Details
