@@ -46,10 +46,12 @@ def add_custom_css():
     )
 def main():
 
-    # Add custom CSS
-    add_custom_css()
+    
     st.set_page_config(page_title="PM2.5 Prediction App", layout="wide")
 
+    # Add custom CSS
+    add_custom_css()
+    
     # Navigation menu
     with st.sidebar:
         selected = option_menu(
