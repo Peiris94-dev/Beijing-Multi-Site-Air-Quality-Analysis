@@ -74,7 +74,7 @@ def main():
         "Introduction": "page1",
         "EDA": "page2",
         "Modeling and Prediction": "page3",
-        "Prediction and Visualization": "page4"
+        "Prediction and Visualization": "page4",
         "Interactive Prediction Dashboard": "page5"
     }
 
