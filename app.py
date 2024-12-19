@@ -10,8 +10,44 @@
 # app.py
 import streamlit as st
 from streamlit_option_menu import option_menu
+def add_custom_css():
+    # CSS for black background
+    st.markdown(
+        """
+        <style>
+        /* Set the background to black */
+        body {
+            background-color: black;
+            color: white; /* Ensure text is visible on a black background */
+        }
 
+        /* Modify headers and links for better visibility */
+        h1, h2, h3, h4, h5, h6 {
+            color: #00FF00; /* Green text for headers */
+        }
+
+        a {
+            color: #1E90FF; /* Blue text for links */
+        }
+
+        /* Info and button sections styling */
+        .st-info {
+            background-color: #333333; /* Dark gray background for info boxes */
+            color: white;
+        }
+
+        button {
+            background-color: #444444; /* Dark gray buttons */
+            color: white;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 def main():
+
+    # Add custom CSS
+    add_custom_css()
     st.set_page_config(page_title="PM2.5 Prediction App", layout="wide")
 
     # Navigation menu
