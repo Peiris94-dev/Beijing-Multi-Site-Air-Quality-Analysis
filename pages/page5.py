@@ -47,12 +47,8 @@ def run():
     add_custom_css()
     st.title("Interactive Prediction Tool")
 
-    # Load dataset
-    st.markdown("### Dataset Overview")
     df = pd.read_csv("PRSA_Data_Aotizhongxin_20130301-20170228.csv")
 
-    # Preprocess data
-    st.markdown("### Select Features for Prediction")
     feature_cols = ["PM10", "SO2", "NO2", "CO", "O3", "TEMP", "PRES", "RAIN", "WSPM"]
     target_col = "PM2.5"
 
@@ -68,12 +64,8 @@ def run():
     model = GradientBoostingRegressor()
     model.fit(X_train, y_train)
 
-    # Predictions
-    st.markdown("### Make Predictions")
     predictions = model.predict(X_test)
     
-    # Interactive Prediction Input
-    st.markdown("### Interactive Prediction Tool")
     user_input = {}
     for feature in feature_cols:
         user_input[feature] = st.number_input(f"Enter {feature} value:", value=float(X[feature].mean()))
