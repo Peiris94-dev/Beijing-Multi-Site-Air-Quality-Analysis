@@ -1,81 +1,135 @@
-# Directory structure:
-# project_name/
-#   |- app.py          # Main file to run the Streamlit app
-#   |- pages/
-#        |- page1.py   # Introduction & Data Description
-#        |- page2.py   # Exploratory Data Analysis
-#        |- page3.py   # Model Training & Evaluation
-#        |- page4.py   # Predictions & Visualizations
-
-# app.py
 import streamlit as st
-from streamlit_option_menu import option_menu
-def add_custom_css():
-    # CSS for black background
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.metrics import classification_report, accuracy_score
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import LogisticRegression
+import numpy as np
+
+def set_black_background_and_sidebar():
     st.markdown(
         """
         <style>
-        /* Set the background to black */
-        body {
+        /* General background styling for the app */
+        .stApp {
             background-color: black;
-            color: white; /* Ensure text is visible on a black background */
-        }
-
-        /* Modify headers and links for better visibility */
-        h1, h2, h3, h4, h5, h6 {
-            color: #00FF00; /* Green text for headers */
-        }
-
-        a {
-            color: #1E90FF; /* Blue text for links */
-        }
-
-        /* Info and button sections styling */
-        .st-info {
-            background-color: #333333; /* Dark gray background for info boxes */
             color: white;
         }
 
-        button {
-            background-color: #444444; /* Dark gray buttons */
+        /* Sidebar styling */
+        .css-1v3fvcr {
+            background-color: black !important; /* Black background */
+        }
+        .css-1v3fvcr, .css-1v3fvcr div, .css-1v3fvcr div span, .css-1v3fvcr div label {
+            color: black !important; 
+        }
+
+        /* Change the background color of the sidebar */
+        .sidebar .sidebar-content {
+            background-color: #31333F;
+        }
+        /* Change the text color of the sidebar */
+        .sidebar .sidebar-content {
+            color: blue;
+        }
+
+        [data-testid="stSidebarContent"] { color: white; background-color: black; }
+        [data-testid="stHeader"] { color: white; background-color: black; }
+        /* Button and interactive elements styling */
+        .stButton > button {
+            background-color: #333333; /* Dark gray buttons */
+            color: white; /* White text */
+        }
+
+        /* Styling headers and text elements globally */
+        h1, h2, h3, h4, h5, h6, p, div, span, label {
+            color: white;
+        }
+
+        /* Styling dataframes */
+        .st-dataframe {
+            background-color: #222222;
             color: white;
         }
         </style>
         """,
         unsafe_allow_html=True
     )
+
+
+# Set page configuration
+st.set_page_config(page_title="Beijing Air Quality Analysis", layout="wide")
+
 def main():
+    # Apply custom CSS
+    set_black_background_and_sidebar()
 
-    
-    st.set_page_config(page_title="PM2.5 Prediction App", layout="wide")
+    # Sidebar navigation
+    st.sidebar.title("Navigation")
+    options = [
+        "Home",
+        "Data Overview",
+        "Exploratory Data Analysis",
+        "Modeling and Prediction",
+        "About the Project"
+    ]
+    choice = st.sidebar.radio("Go to", options)
 
-    # Add custom CSS
-    add_custom_css()
-    
-    # Navigation menu
-    with st.sidebar:
-        selected = option_menu(
-            "Main Menu",
-            ["Introduction", "EDA", "Model Training", "Predictions"],
-            icons=["house", "bar-chart", "cpu", "line-chart"],
-            menu_icon="cast",
-            default_index=0,
+    # Sample DataFrame for demonstration
+    df = pd.DataFrame({
+        'Station': ['A', 'B', 'C', 'D'],
+        'PM2.5': [50, 80, 120, 30],
+        'AQI': [80, 100, 150, 40],
+        'Status': ['Good', 'Moderate', 'Unhealthy', 'Good']
+    })
+
+    if choice == "Home":
+        st.title("Welcome to Beijing Air Quality Analysis")
+        st.markdown("---")
+        st.write(
+            "This application allows you to explore, analyze, and model air quality data from Beijing. "
+            "Use the navigation panel on the left to switch between sections."
         )
+        st.image("https://images.unsplash.com/photo-1643902433280-8f8807b7f743?w=600&auto=format&fit=crop&q=60", use_container_width=True)
 
-    # Page selection
-    if selected == "Introduction":
-        import pages.page1 as page1
-        page1.run()
-    elif selected == "EDA":
-        import pages.page2 as page2
-        page2.run()
-    elif selected == "Model Training":
-        import pages.page3 as page3
-        page3.run()
-    elif selected == "Predictions":
-        import pages.page4 as page4
-        page4.run()
+    elif choice == "Data Overview":
+        st.title("Data Overview")
+        st.markdown("---")
+        st.write("### Dataset Summary")
+        st.write(df.describe())
+
+        st.write("### Sample Data")
+        st.dataframe(df)
+
+    elif choice == "Exploratory Data Analysis":
+        st.title("Exploratory Data Analysis")
+        st.markdown("---")
+
+        st.write("### PM2.5 Levels Distribution")
+        fig, ax = plt.subplots(figsize=(10, 6))
+        sns.barplot(x='Station', y='PM2.5', data=df, ax=ax)
+        ax.set_title("PM2.5 Levels by Station")
+        st.pyplot(fig)
+
+    elif choice == "Modeling and Prediction":
+        st.title("Modeling and Prediction")
+        st.markdown("---")
+
+        st.write("### Sample Modeling Section")
+        st.write("This section can be used to train and evaluate machine learning models.")
+
+    elif choice == "About the Project":
+        st.title("About the Project")
+        st.markdown("---")
+        st.write(
+            "This project leverages the Beijing Multi-Site Air Quality dataset to analyze pollution trends, "
+            "build machine learning models for prediction, and provide an interactive platform for exploration."
+        )
+        st.image("https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?w=600&auto=format&fit=crop&q=60", use_container_width=True)
 
 if __name__ == "__main__":
     main()
-
